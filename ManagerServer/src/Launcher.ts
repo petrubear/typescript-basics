@@ -1,8 +1,6 @@
 import {Server} from './server/Server';
 
 class Launcher {
-    // instance variables
-    // private name: string;
     private server: Server;
 
     // constructors

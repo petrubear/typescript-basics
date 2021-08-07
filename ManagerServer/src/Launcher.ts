@@ -1,4 +1,4 @@
-import { Server } from './server/Server';
+import {Server} from './server/Server';
 
 class Launcher {
     // instance variables

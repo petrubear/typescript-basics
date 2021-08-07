@@ -1,0 +1,18 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Debug app",
+      "cwd": "${workspaceFolder}/ManagerServer/",
+      "runtimeArgs": [
+        "-r",
+        "ts-node/register"
+      ],
+      "args": [
+        "${workspaceFolder}/ManagerServer/src/Launcher.ts"
+      ]
+    }
+  ]
+}

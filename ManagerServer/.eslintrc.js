@@ -15,7 +15,7 @@ module.exports = {
         '@typescript-eslint',
     ],
     'rules': {
-        'indent': ['error', 4],
+        'indent': ['error', 4, {'SwitchCase': 1}],
         'max-len': ['error', {'code': 120}],
         'require-jsdoc': ['off'],
         'space-before-function-paren': ['error', {

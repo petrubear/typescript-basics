@@ -1,7 +1,7 @@
 import {createServer, IncomingMessage, ServerResponse} from 'http';
 import {Utils} from './Utils';
 import {LoginHandler} from './handlers/LoginHandler';
-import {Authorizer} from '../authotization/Authorizer';
+import {Authorizer} from '../authorization/Authorizer';
 
 export class Server {
     private authorizer: Authorizer = new Authorizer();

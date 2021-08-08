@@ -13,7 +13,6 @@ export class LoginHandler implements Handler {
     }
 
     public async handleRequest(): Promise<void> {
-
         try {
             const body = await this.getRequestBody();
             const sessionToken = await this.tokenGenerator.generateToken(body);

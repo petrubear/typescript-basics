@@ -23,6 +23,9 @@ export class UsersHandler extends BaseRequestHandler {
             case HTTP_METHODS.PUT:
                 await this.handlePut();
                 break;
+            case HTTP_METHODS.DELETE:
+                await this.handleDelete();
+                break;
             default:
                 await this.handleNotFound();
                 break;
@@ -66,6 +69,26 @@ export class UsersHandler extends BaseRequestHandler {
             }
         } else {
             this.respondUnauthorized('missing or invalid authentication');
+        }
+    }
+
+    private async handleDelete() {
+        const operationAuthorized = await this.operationAuthorized(AccessRight.DELETE);
+        if (operationAuthorized) {
+            const parsedUrl = Utils.getUrlParameters(this.req.url);
+            if (parsedUrl) {
+                const userId: string = parsedUrl.query.id as string;
+                if (userId) {
+                    const deleteResult = await this.usersDBAccess.deleteUser(userId);
+                    if (deleteResult) {
+                        this.respondText(HTTP_CODES.OK, `user(s) with id ${userId} deleted successfully`);
+                    } else {
+                        this.respondText(HTTP_CODES.NOT_FOUND, `user(s) with id ${userId} not found`);
+                    }
+                } else {
+                    this.respondBadRequest('missing id in request');
+                }
+            }
         }
     }
 

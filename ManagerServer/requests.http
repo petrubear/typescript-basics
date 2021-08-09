@@ -38,3 +38,9 @@ Accept: 'text/json'
 Authorization: {{auth_token}}
 
 ###
+
+### delete
+DELETE {{server_url}}/users?id=6r8eb1ufw46
+Accept: 'text/json'
+Authorization: {{auth_token}}
+###

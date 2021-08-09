@@ -42,8 +42,11 @@ export class UsersHandler extends BaseRequestHandler {
                     } else {
                         await this.handleNotFound();
                     }
+                } else if (parsedUrl.query.name) {
+                    const users = await this.usersDBAccess.getUserByName(parsedUrl.query.name as string);
+                    this.respondJsonObject(HTTP_CODES.OK, users);
                 } else {
-                    this.respondBadRequest('userId not present in request');
+                    this.respondBadRequest('userId or name not present in request');
                 }
             }
         } else {

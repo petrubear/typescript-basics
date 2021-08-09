@@ -7,18 +7,21 @@ Content-Type: 'application/json'
     "password": "password"
 }
 
+> {%
+    client.global.set("auth_token", response.body.tokenId);
+%}
 ###
 
 ### Get Users
 GET {{server_url}}/users?id=asdfafa
 Accept: 'text/json'
-Authorization: fdinung34vv
+Authorization: {{auth_token}}
 
 ###
 
 ### PUT
 PUT {{server_url}}/users
-Authorization: 285kdxe5q8r
+Authorization: {{auth_token}}
 Content-Type: 'application/json'
 
 {
@@ -27,5 +30,11 @@ Content-Type: 'application/json'
   "name": "user45",
   "workingPosition": 3
 }
+
+###
+### Get Users by name
+GET {{server_url}}/users?name=user
+Accept: 'text/json'
+Authorization: {{auth_token}}
 
 ###

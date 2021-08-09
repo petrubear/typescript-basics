@@ -42,8 +42,13 @@ export abstract class BaseRequestHandler implements Handler {
         this.res.write(JSON.stringify(object));
     }
 
-    protected respodBadRequest(message: string): void {
+    protected respondBadRequest(message: string): void {
         this.res.statusCode = HTTP_CODES.BAD_REQUEST;
+        this.res.write(message);
+    }
+
+    protected respondUnauthorized(message: string): void {
+        this.res.statusCode = HTTP_CODES.UNAUTHORIZED;
         this.res.write(message);
     }
 }

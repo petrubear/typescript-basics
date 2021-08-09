@@ -11,4 +11,5 @@ Content-Type: 'application/json'
 ### Get Users
 GET {{server_url}}/users?id=asdfafa
 Accept: 'text/json'
+Authorization: fdinung34vv
 ###

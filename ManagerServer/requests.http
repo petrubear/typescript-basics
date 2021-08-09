@@ -6,10 +6,26 @@ Content-Type: 'application/json'
     "username": "user1",
     "password": "password"
 }
+
 ###
 
 ### Get Users
 GET {{server_url}}/users?id=asdfafa
 Accept: 'text/json'
 Authorization: fdinung34vv
+
+###
+
+### PUT
+PUT {{server_url}}/users
+Authorization: 285kdxe5q8r
+Content-Type: 'application/json'
+
+{
+  "age": 45,
+  "email": "user45@example.com",
+  "name": "user45",
+  "workingPosition": 3
+}
+
 ###

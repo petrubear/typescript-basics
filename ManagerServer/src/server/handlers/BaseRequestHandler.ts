@@ -51,4 +51,9 @@ export abstract class BaseRequestHandler implements Handler {
         this.res.statusCode = HTTP_CODES.UNAUTHORIZED;
         this.res.write(message);
     }
+
+    protected respondText(code: HTTP_CODES, message: string): void {
+        this.res.statusCode = code;
+        this.res.write(message);
+    }
 }

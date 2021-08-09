@@ -1,6 +1,6 @@
 import {IncomingMessage, ServerResponse} from 'http';
 import {UsersDBAccess} from '../../user/UsersDBAccess';
-import {AccessRight, HTTP_CODES, HTTP_METHODS} from '../../shared/Model';
+import {AccessRight, HTTP_CODES, HTTP_METHODS, User} from '../../shared/Model';
 import {Utils} from '../Utils';
 import {BaseRequestHandler} from './BaseRequestHandler';
 import {TokenValidator} from '../model/Models';
@@ -19,6 +19,9 @@ export class UsersHandler extends BaseRequestHandler {
         switch (this.req.method) {
             case HTTP_METHODS.GET:
                 await this.handleGet();
+                break;
+            case HTTP_METHODS.PUT:
+                await this.handlePut();
                 break;
             default:
                 await this.handleNotFound();
@@ -42,6 +45,21 @@ export class UsersHandler extends BaseRequestHandler {
                 } else {
                     this.respondBadRequest('userId not present in request');
                 }
+            }
+        } else {
+            this.respondUnauthorized('missing or invalid authentication');
+        }
+    }
+
+    private async handlePut() {
+        const operationAuthorized = await this.operationAuthorized(AccessRight.CREATE);
+        if (operationAuthorized) {
+            try {
+                const user: User = await this.getRequestBody();
+                await this.usersDBAccess.putUser(user);
+                this.respondText(HTTP_CODES.CREATED, `user ${user.name} created`);
+            } catch (error) {
+                this.respondBadRequest(error.message);
             }
         } else {
             this.respondUnauthorized('missing or invalid authentication');

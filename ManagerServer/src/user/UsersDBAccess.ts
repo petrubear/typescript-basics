@@ -20,4 +20,20 @@ export class UsersDBAccess {
             });
         });
     }
+
+    public async getUserById(userId: string): Promise<User | undefined> {
+        return new Promise<User | undefined>((resolve, reject) => {
+            this.nedb.find({id: userId}, (err: Error | null, docs: any) => {
+                if (err) {
+                    reject(err);
+                } else {
+                    if (docs.length == 0) {
+                        resolve(undefined);
+                    } else {
+                        resolve(docs[0]);
+                    }
+                }
+            });
+        });
+    }
 }

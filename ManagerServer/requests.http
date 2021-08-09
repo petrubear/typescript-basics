@@ -9,5 +9,6 @@ Content-Type: 'application/json'
 ###
 
 ### Get Users
-GET {{server_url}}/users?id=123
+GET {{server_url}}/users?id=asdfafa
+Accept: 'text/json'
 ###

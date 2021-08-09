@@ -36,4 +36,14 @@ export abstract class BaseRequestHandler implements Handler {
             });
         });
     }
+
+    protected respondJsonObject(code: HTTP_CODES, object: any): void {
+        this.res.writeHead(code, {'Content-Type': 'application/json'});
+        this.res.write(JSON.stringify(object));
+    }
+
+    protected respodBadRequest(message: string): void {
+        this.res.statusCode = HTTP_CODES.BAD_REQUEST;
+        this.res.write(message);
+    }
 }

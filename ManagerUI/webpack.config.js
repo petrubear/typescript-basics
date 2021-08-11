@@ -25,5 +25,6 @@ module.exports = {
         compress: true,
         port: 9000,
         publicPath: '/dist/',
+        historyApiFallback: true,
     },
 };

@@ -6,10 +6,12 @@ import {UsersHandler} from './handlers/UsersHandler';
 
 export class Server {
     private authorizer: Authorizer = new Authorizer();
+    private port: number = 3000;
 
     public createServer() {
         createServer(async (req: IncomingMessage, res: ServerResponse) => {
             console.log(`got request from ${req.url}`);
+            this.addCorsHeader(res);
             const basePath = Utils.getUrlBasePath(req.url);
 
             switch (basePath) {
@@ -24,7 +26,12 @@ export class Server {
             }
 
             res.end();
-        }).listen(3000);
-        console.log('server started');
+        }).listen(this.port);
+        console.log(`Server listening on port ${this.port}`);
+    }
+
+    private addCorsHeader(res: ServerResponse): void {
+        res.setHeader('Access-Control-Allow-Origin', '*');
+        res.setHeader('Access-Control-Allow-Headers', '*');
     }
 }

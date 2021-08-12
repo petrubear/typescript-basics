@@ -18,6 +18,7 @@ module.exports = {
         'indent': ['error', 4, {'SwitchCase': 1}],
         'max-len': ['error', {'code': 120}],
         'require-jsdoc': ['off'],
+        'no-invalid-this': ['off'],
         'space-before-function-paren': ['error', {
             'anonymous': 'always',
             'named': 'never',

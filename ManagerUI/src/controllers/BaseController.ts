@@ -14,7 +14,7 @@ export abstract class BaseController {
     protected createElement<K extends keyof HTMLElementTagNameMap>(
         tagName: K,
         innerText?: string,
-        action?: { (): void }): HTMLElementTagNameMap[K] {
+        action?: { (): void }) {
         const element = document.createElement(tagName);
         if (innerText) {
             element.innerText = innerText;
@@ -22,7 +22,6 @@ export abstract class BaseController {
         if (action) {
             element.onclick = action;
         }
-        this.container.append(element);
         return element;
     }
 

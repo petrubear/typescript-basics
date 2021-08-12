@@ -1,6 +1,8 @@
 import {BaseController} from './BaseController';
+import {LoginService} from '../services/LoginService';
 
 export class LoginController extends BaseController {
+    private loginService: LoginService = new LoginService();
     private errorLabel = this.createElement('label');
 
     public createView(): HTMLDivElement {
@@ -12,9 +14,15 @@ export class LoginController extends BaseController {
         passwordInput.type = 'password';
         const loginButton = this.createElement('button',
             'Login',
-            () => {
+            async () => {
                 if (userNameInput.value && passwordInput.value) {
                     this.resetErrorLabel();
+                    const result = await this.loginService.login(userNameInput.value, passwordInput.value);
+                    if (result) {
+                        this.router.switchToDashboardView(result);
+                    } else {
+                        this.showErrorLabel('invalid username or password');
+                    }
                 } else {
                     this.showErrorLabel('Please fill both fields');
                 }

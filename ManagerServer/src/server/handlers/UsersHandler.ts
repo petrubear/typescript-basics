@@ -26,6 +26,9 @@ export class UsersHandler extends BaseRequestHandler {
             case HTTP_METHODS.DELETE:
                 await this.handleDelete();
                 break;
+            case HTTP_METHODS.OPTIONS:
+                this.res.writeHead(HTTP_CODES.OK);
+                break;
             default:
                 await this.handleNotFound();
                 break;

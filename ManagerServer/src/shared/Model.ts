@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import {Account} from '../server/model/Models';
 
 export enum AccessRight {

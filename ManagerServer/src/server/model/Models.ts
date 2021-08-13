@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import {AccessRight} from '../../shared/Model';
 
 export interface Account {

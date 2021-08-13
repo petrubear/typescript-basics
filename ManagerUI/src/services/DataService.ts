@@ -26,6 +26,6 @@ export class DataService {
                 'Authorization': authorization,
             },
         };
-        const result = await fetch(url, options);
+        await fetch(url, options);
     }
 }

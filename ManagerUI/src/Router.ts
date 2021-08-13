@@ -42,7 +42,7 @@ export class Router {
             this.mainElement.innerHTML = '';
             const dashboardController: DashboardController = new DashboardController(this);
             if (sessionToken) {
-                dashboardController.setSessionToken(sessionToken.get());
+                dashboardController.setSessionToken(sessionToken);
             }
             this.mainElement?.append(dashboardController.createView());
         }

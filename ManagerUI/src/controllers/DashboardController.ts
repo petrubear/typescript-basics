@@ -2,6 +2,7 @@ import {BaseController} from './BaseController';
 import {AccessRight, SessionToken} from '../model/AuthenticationModel';
 import {DataService} from '../services/DataService';
 import {User} from '../model/DataModels';
+import {Optional} from '../model/Optional';
 
 export class DashboardController extends BaseController {
     private sessionToken: SessionToken | undefined;
@@ -11,8 +12,12 @@ export class DashboardController extends BaseController {
     private selectedUser: User | undefined;
     private selectedLabel: HTMLLabelElement | undefined;
 
-    public setSessionToken(sessionToken: SessionToken) {
-        this.sessionToken = sessionToken;
+    public setSessionToken(sessionToken: Optional<SessionToken>) {
+        if (sessionToken.isPresent()) {
+            this.sessionToken = sessionToken.get();
+        } else {
+            this.sessionToken = undefined;
+        }
     }
 
     createView(): HTMLDivElement {

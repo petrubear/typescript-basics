@@ -1,10 +1,11 @@
 import {SessionToken} from '../model/AuthenticationModel';
+import {Optional} from '../model/Optional';
 
 const baseUrl = 'http://localhost:3000';
 const loginUrl = baseUrl + '/login';
 
 export class LoginService {
-    public async login(userName: string, password: string): Promise<SessionToken | undefined> {
+    public async login(userName: string, password: string): Promise<Optional<SessionToken>> {
         const options = {
             method: 'POST',
             headers: {
@@ -17,9 +18,10 @@ export class LoginService {
         };
         const result = await fetch(loginUrl, options);
         if (result.status === 201) {
-            return await result.json();
+            const value = await result.json();
+            return Optional.of(value);
         } else {
-            return undefined;
+            return Optional.empty();
         }
     }
 }

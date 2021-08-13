@@ -18,7 +18,7 @@ export class LoginController extends BaseController {
                 if (userNameInput.value && passwordInput.value) {
                     this.resetErrorLabel();
                     const result = await this.loginService.login(userNameInput.value, passwordInput.value);
-                    if (result) {
+                    if (result.isPresent()) {
                         this.router.switchToDashboardView(result);
                     } else {
                         this.showErrorLabel('invalid username or password');

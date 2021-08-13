@@ -2,6 +2,7 @@ import {MainController} from './controllers/MainController';
 import {LoginController} from './controllers/LoginController';
 import {SessionToken} from './model/AuthenticationModel';
 import {DashboardController} from './controllers/DashboardController';
+import {Optional} from './model/Optional';
 
 export class Router {
     private mainElement = document.getElementById('main-container');
@@ -14,7 +15,7 @@ export class Router {
                 this.switchToLoginView();
                 break;
             case '/dashboard':
-                this.switchToDashboardView(undefined);
+                this.switchToDashboardView(Optional.empty());
                 break;
             default:
                 if (this.mainElement) {
@@ -36,12 +37,12 @@ export class Router {
         }
     }
 
-    public switchToDashboardView(sessionToken: SessionToken | undefined): void {
+    public switchToDashboardView(sessionToken: Optional<SessionToken>): void {
         if (this.mainElement) {
             this.mainElement.innerHTML = '';
             const dashboardController: DashboardController = new DashboardController(this);
             if (sessionToken) {
-                dashboardController.setSessionToken(sessionToken);
+                dashboardController.setSessionToken(sessionToken.get());
             }
             this.mainElement?.append(dashboardController.createView());
         }

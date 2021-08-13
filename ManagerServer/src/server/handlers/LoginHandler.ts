@@ -2,7 +2,9 @@ import {IncomingMessage, ServerResponse} from 'http';
 import {Account, TokenGenerator} from '../model/Models';
 import {HTTP_CODES, HTTP_METHODS} from '../../shared/Model';
 import {BaseRequestHandler} from './BaseRequestHandler';
+import {countInstances} from '../../shared/ObjectsCounter';
 
+@countInstances
 export class LoginHandler extends BaseRequestHandler {
     private tokenGenerator: TokenGenerator;
 

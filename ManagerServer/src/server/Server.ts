@@ -3,6 +3,7 @@ import {Utils} from './Utils';
 import {LoginHandler} from './handlers/LoginHandler';
 import {Authorizer} from '../authorization/Authorizer';
 import {UsersHandler} from './handlers/UsersHandler';
+import {Monitor} from '../shared/ObjectsCounter';
 
 export class Server {
     private authorizer: Authorizer = new Authorizer();
@@ -15,6 +16,9 @@ export class Server {
             const basePath = Utils.getUrlBasePath(req.url);
 
             switch (basePath) {
+                case 'systemInfo':
+                    res.write(Monitor.printInstances());
+                    break;
                 case 'login':
                     await new LoginHandler(req, res, this.authorizer).handleRequest();
                     break;

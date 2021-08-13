@@ -1,15 +1,20 @@
+### System info
+GET {{server_url}}/systemInfo
+
+###
 ### Login
 POST {{server_url}}/login
 Content-Type: 'application/json'
 
 {
     "username": "user1",
-    "password": "password"
+    "password": "pass1"
 }
 
 > {%
     client.global.set("auth_token", response.body.tokenId);
 %}
+
 ###
 
 ### Get Users
@@ -43,4 +48,5 @@ Authorization: {{auth_token}}
 DELETE {{server_url}}/users?id=6r8eb1ufw46
 Accept: 'text/json'
 Authorization: {{auth_token}}
+
 ###

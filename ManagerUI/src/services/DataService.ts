@@ -16,4 +16,16 @@ export class DataService {
         const result = await fetch(url, options);
         return await result.json();
     }
+
+    public async deleteUser(authorization: string, user: User): Promise<void> {
+        const url = `${usersUrl}?name=${user.id}`;
+        const options = {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': authorization,
+            },
+        };
+        const result = await fetch(url, options);
+    }
 }
